@@ -13,12 +13,10 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value),
           );
-
           supabaseResponse = NextResponse.next({ request });
-
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options),
           );
@@ -26,16 +24,36 @@ export async function updateSession(request: NextRequest) {
       },
     },
   );
-  // IMPORTANT: Avoid writing any logic between createServerClient and
-  // supabase.auth.getUser(). A simple mistake could make it very hard to debug
-  // issues with users being randomly logged out.
 
+  // IMPORTANT: Avoid writing any logic between createServerClient and
+  // supabase.auth.getUser().
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  //  Refresh session if expired - required for Server Components
-  //  https://supabase.com/docs/guides/auth/server-side/nextjs
+  // Protected routes — redirect to /login if not authenticated
+  const protectedPaths = ["/dashboard", "/profile"];
+  const isProtectedPath = protectedPaths.some((path) =>
+    request.nextUrl.pathname.startsWith(path),
+  );
+
+  if (isProtectedPath && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    return NextResponse.redirect(url);
+  }
+
+  // Redirect logged-in users away from auth pages
+  const authPaths = ["/login", "/register"];
+  const isAuthPath = authPaths.some(
+    (path) => request.nextUrl.pathname === path,
+  );
+
+  if (isAuthPath && user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/dashboard";
+    return NextResponse.redirect(url);
+  }
 
   return supabaseResponse;
 }
