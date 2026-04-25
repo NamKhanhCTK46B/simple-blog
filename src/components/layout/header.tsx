@@ -20,6 +20,12 @@ export async function Header() {
             <Link href="/" className="text-gray-600 hover:text-gray-900">
               Trang chủ
             </Link>
+            <Link
+              href="/search"
+              className="text-gray-600 hover:text-gray-900"
+            >
+              Tìm kiếm
+            </Link>
 
             {user ? (
               <>
