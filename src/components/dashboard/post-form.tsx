@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Post, PostStatus } from "@/types/database";
+import { ImageUploader } from "./image-uploader";
 
 interface PostFormProps {
   post?: Post;
@@ -126,6 +127,12 @@ export function PostForm({ post }: PostFormProps) {
         />
         <p className="mt-1 text-xs text-gray-500">Hỗ trợ Markdown</p>
       </div>
+
+      <ImageUploader
+        onUploaded={(md) =>
+          setContent((c) => (c ? `${c}\n\n${md}\n` : `${md}\n`))
+        }
+      />
 
       <div>
         <label
