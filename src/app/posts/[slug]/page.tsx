@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import ReactMarkdown from "react-markdown";
 import { CommentForm } from "@/components/posts/comment-form";
 import { RealtimeComments } from "@/components/posts/realtime-comments";
 import { LikeButton } from "@/components/posts/like-button";
@@ -87,12 +88,62 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
         </header>
 
-        <div className="prose prose-lg max-w-none mb-8">
-          {post.content?.split("\n").map((paragraph: string, index: number) => (
-            <p key={index} className="mb-3 whitespace-pre-wrap">
-              {paragraph}
-            </p>
-          ))}
+        <div className="max-w-none mb-8 leading-relaxed text-gray-800">
+          <ReactMarkdown
+            components={{
+              h1: (props) => (
+                <h1 className="text-3xl font-bold mt-6 mb-3" {...props} />
+              ),
+              h2: (props) => (
+                <h2 className="text-2xl font-bold mt-6 mb-3" {...props} />
+              ),
+              h3: (props) => (
+                <h3 className="text-xl font-semibold mt-4 mb-2" {...props} />
+              ),
+              p: (props) => <p className="mb-4" {...props} />,
+              ul: (props) => (
+                <ul className="list-disc pl-6 mb-4 space-y-1" {...props} />
+              ),
+              ol: (props) => (
+                <ol className="list-decimal pl-6 mb-4 space-y-1" {...props} />
+              ),
+              a: (props) => (
+                <a
+                  className="text-blue-600 hover:underline"
+                  target="_blank"
+                  rel="noreferrer"
+                  {...props}
+                />
+              ),
+              code: (props) => (
+                <code
+                  className="bg-gray-100 px-1 rounded text-sm font-mono"
+                  {...props}
+                />
+              ),
+              pre: (props) => (
+                <pre
+                  className="bg-gray-900 text-gray-100 p-4 rounded-md overflow-x-auto mb-4"
+                  {...props}
+                />
+              ),
+              img: (props) => (
+                // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+                <img
+                  className="max-w-full h-auto rounded-md my-4"
+                  {...props}
+                />
+              ),
+              blockquote: (props) => (
+                <blockquote
+                  className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-4"
+                  {...props}
+                />
+              ),
+            }}
+          >
+            {post.content || ""}
+          </ReactMarkdown>
         </div>
 
         <div className="mb-12">
