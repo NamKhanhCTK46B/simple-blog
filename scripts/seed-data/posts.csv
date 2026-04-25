@@ -1,0 +1,42 @@
+author_id,title,slug,content,excerpt,status,published_at
+8d2a964b-1ec5-4181-b2f6-130721e5f495,"Bắt đầu với Next.js 15 và App Router",,"# Bắt đầu với Next.js 15
+
+Next.js 15 mang đến App Router ổn định, Server Components mặc định và Turbopack nhanh hơn nhiều so với webpack.
+
+## Những điểm chính
+
+- **Server Components** giúp giảm bundle JavaScript phía client.
+- **Server Actions** cho phép gọi backend logic mà không cần viết API route.
+- **Streaming & Suspense** cải thiện trải nghiệm tải trang.
+
+Trong bài này, mình sẽ hướng dẫn cách khởi tạo project và cấu trúc folder hợp lý.","Tổng quan về Next.js 15 với App Router, Server Components và Server Actions cho người mới bắt đầu.",published,2026-04-22 09:00:00+00
+d8cceca0-a953-42f1-b554-13053682950e,"Supabase RLS — Bảo mật cấp độ database",,"# Row Level Security trong Supabase
+
+RLS (Row Level Security) là tính năng mạnh mẽ của PostgreSQL cho phép kiểm soát quyền truy cập ở cấp độ từng dòng dữ liệu.
+
+## Tại sao cần RLS?
+
+Khi client dùng ""anon key"" để gọi API trực tiếp, bất kỳ ai cũng có thể truy vấn database. Không có RLS, dữ liệu của bạn hoàn toàn không được bảo vệ.
+
+## Ví dụ policy đơn giản
+
+create policy ""Users can update own profile""
+on public.profiles for update
+to authenticated
+using ((select auth.uid()) = id);
+
+Mỗi query sẽ tự động được thêm điều kiện WHERE tương ứng với user đang đăng nhập.","Tìm hiểu cách Supabase tận dụng PostgreSQL Row Level Security để bảo vệ dữ liệu ngay tại database.",published,2026-04-24 14:30:00+00
+d8cceca0-a953-42f1-b554-13053682950e,"Tailwind CSS v4 — Những thay đổi đáng chú ý",,"# Tailwind CSS v4
+
+Tailwind CSS v4 ra mắt với engine mới viết bằng Rust, hỗ trợ CSS native và performance vượt trội.
+
+## Điểm nổi bật
+
+1. **Oxide engine** — Nhanh hơn 5–10 lần so với v3.
+2. **CSS-first config** — Dùng @theme thay cho tailwind.config.js.
+3. **Auto content detection** — Không cần khai báo content thủ công.
+
+Nếu bạn đang dùng v3, việc nâng cấp khá đơn giản nhờ codemod chính thức.","Tailwind CSS v4 với engine Oxide, CSS-first config và auto content detection.",published,2026-04-25 08:15:00+00
+d8cceca0-a953-42f1-b554-13053682950e,"Bản nháp — Deep dive vào React Server Components",,"# Đang viết...
+
+Bài này còn đang trong quá trình hoàn thiện, sẽ phân tích sâu cách React Server Components hoạt động.","Phân tích sâu cách React Server Components hoạt động (đang soạn).",draft,

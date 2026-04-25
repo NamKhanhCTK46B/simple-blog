@@ -1,0 +1,4 @@
+post_id,author_id,content
+a23bfa18-09e2-42b8-94b6-da1ac94a5f9d,d8cceca0-a953-42f1-b554-13053682950e,"Bài viết rất dễ hiểu, cảm ơn chị Lan đã chia sẻ!"
+a23bfa18-09e2-42b8-94b6-da1ac94a5f9d,8d2a964b-1ec5-4181-b2f6-130721e5f495,"Mình đã follow guide này và setup được trong 30 phút. Tuyệt vời!"
+fa18f4ed-dcbd-4b2d-8b5c-2accd5c47a7a,d8cceca0-a953-42f1-b554-13053682950e,"Phần ví dụ policy nên thêm trường hợp INSERT with check cho đầy đủ hơn nhé."
